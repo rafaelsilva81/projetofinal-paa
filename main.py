@@ -1,5 +1,7 @@
 import time
 import requests
+import lorem
+import os
 
 def kmp_search(pattern: str, text: str):
     """[summary]
@@ -75,22 +77,14 @@ def naive_search(pattern: str, text: str):
             pass
             #print("Pattern found at index ", i)
  
-def get_text():
-    """[summary]
-    Obtém um texto através de um request para uma API geradora de texto Lorem Ipsum
-    """
-    req_url = 'https://asdfast.beobit.net/api/'
-    params = {'type':'paragraph','length':'2000','startLorem':'true'}
-    response = requests.get(url=req_url, params=params)
-    data = response.json()
-
-    return (data["text"].replace('\n',''))
-
 def main(): 
-
-    text = get_text()
-
-    pattern = "consectetur"
+    
+    #GERADOR DE LOREM IPSUM ALEATÓRIO
+    text = lorem.get_paragraph(count=10000, comma=(0, 2), word_range=(4, 10), sentence_range=(5, 10), sep=os.linesep)
+    
+    #GERADOR DE PADRÃO ALEATÓRIO
+    pattern = lorem.get_word(count=1)
+    #pattern = "consectetur"
     print("\n========= PATTERN ESCOLHIDO : ",pattern)
     
     #INICIO DO TESTE KMP
