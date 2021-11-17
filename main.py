@@ -1,6 +1,6 @@
 import time
-import requests
 import lorem
+import requests
 import os
 
 def kmp_search(pattern: str, text: str):
@@ -76,12 +76,26 @@ def naive_search(pattern: str, text: str):
         if (j == M):
             pass
             #print("Pattern found at index ", i)
- 
+
+def get_texto():
+    """[sumario]
+    Obtém um texto através de um request para uma API geradora de texto Lorem Ipsum
+    """
+    req_url = 'https://asdfast.beobit.net/api/'
+    params = {'type':'paragraph','length':'2000','startLorem':'true'}
+    response = requests.get(url=req_url, params=params)
+    data = response.json()
+
+    return (data["text"].replace('\n',''))
+
 def main(): 
     
-    #GERADOR DE LOREM IPSUM ALEATÓRIO
-    text = lorem.get_paragraph(count=10000, comma=(0, 2), word_range=(4, 10), sentence_range=(5, 10), sep=os.linesep)
     
+    #GERADOR DE LOREM IPSUM ALEATÓRIO
+    text = lorem.get_paragraph(count=2000, comma=(0, 2), word_range=(4, 10), sentence_range=(5, 10), sep=os.linesep)
+    #text = get_texto()
+
+    print("\n===========================TEXTO===========================",text,"\n")
     #GERADOR DE PADRÃO ALEATÓRIO
     pattern = lorem.get_word(count=1)
     #pattern = "consectetur"
