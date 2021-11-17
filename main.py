@@ -1,7 +1,6 @@
 import time
 import lorem
 import requests
-import os
 
 def kmp_search(pattern: str, text: str):
     """[summary]
@@ -92,10 +91,12 @@ def main():
     
     
     #GERADOR DE LOREM IPSUM ALEATÓRIO
-    text = lorem.get_paragraph(count=2000, comma=(0, 2), word_range=(4, 10), sentence_range=(5, 10), sep=os.linesep)
+    text = lorem.get_sentence(count=1, comma=(0, 2), word_range=(500000, 500000)) 
+    #text = lorem.get_paragraph(count=2000, comma=(0, 2), word_range=(4, 10), sentence_range=(5, 10), sep='\n')
+   
     #text = get_texto()
+    #print("\n===========================TEXTO===========================",text,"\n")
 
-    print("\n===========================TEXTO===========================",text,"\n")
     #GERADOR DE PADRÃO ALEATÓRIO
     pattern = lorem.get_word(count=1)
     #pattern = "consectetur"
