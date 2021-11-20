@@ -1,0 +1,26 @@
+------- Início --------
+
+funcao naive_busca(padrao: string, texto: string):
+    /*[sumario]
+    Busca padrão dentro do texto de entrada através de duas estruturas de repetição aninhadas.
+    Args:
+        padrao (string): padrão a ser buscado.
+        texto (string): texto onde será buscado o padrão.
+    */
+    M = padrao.tamanho()
+    N = texto.tamanho()
+ 
+    // Primeiro loop no padrao
+    for i em (N - M + 1):
+        j = 0
+         
+        // Para o atual index i, checar se o padrao está presente no texto
+        Enquanto(j < M):
+            se (texto[i + j] != padrao[j]):
+                break
+            j += 1
+        
+        se (j == M):
+            // aqui pode-se printar o index em que o padrão foi encontrado 
+
+------- Fim --------

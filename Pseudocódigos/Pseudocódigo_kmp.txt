@@ -1,0 +1,53 @@
+------- Início --------
+
+funcao kmp_busca(padrao: string, texto: string):
+    /*[sumario]
+    Busca o padrão dentro do texto de entrada.
+    Args:
+        padrao (string): padrão a ser buscado.
+        texto (string): texto onde será buscado o padrão.
+    */
+    n = texto.tamanho()  // armazena o tamanho do texto
+    m = padrao.tamanho() // armazena o tamanho do padrão
+    lps = [0]*m  // inicializa um array de tamanho 'm' preenchido com 0's
+    calcular_lsp(padrao, m, lps)  // prefixo mais longo que também é um sufixo
+    i = 0
+    j = 0
+    Enquanto i < n:
+        se texto[i] == padrao[j]:
+            // se elementos nos indices do texto e padrão são iguais
+            // incrementa os indices
+            i += 1
+            j += 1
+        senao:
+            // mismatch após j match
+            // Não teve match nos caracteres lps[0, ...,j-1]
+            // irão dar match de qualquer jeito
+            se j != 0:
+                j = lps[j-1]
+            senao:
+                i += 1
+        se j == m:
+            // encontrou o padrão
+            //print("padrao found at index :", i-j)
+            j = lps[j-1]
+
+
+funcao calcular_lsp(padrao: string, m: int, lps: lista):
+    len = 0  // tamanho do lps anterior
+    i = 1
+    lps[0] = 0  // lps[0] é sempre igual a 0
+
+    Enquanto i < m:  // calcula lps[i] de i=1 à m-1
+        se padrao[i] == padrao[len]:
+            lps[i] = len+1
+            len += 1
+            i += 1
+        senao:
+            se len != 0:
+                len = 0
+            senao:
+                lps[i] = 0
+                i += 1
+
+------- Fim --------
