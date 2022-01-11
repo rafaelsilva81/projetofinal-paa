@@ -1,7 +1,6 @@
 import time
 import lorem
-import requests
-
+NANO_MULTIPLIER = 1000000000
 
 def kmp_search(pattern: str, text: str):
     """[summary]
@@ -61,53 +60,48 @@ def naive_search(pattern: str, text: str):
         pattern (string): padrão a ser buscado.
         text (string): texto onde será buscado o padrão.
     """
-    M = len(pattern)
-    N = len(text)
+
+    
+    N = len(text) #obtem o tamanho do texto
+    M = len(pattern) #obtem o tamanho do padrão
+
+    """
+        Tamanho máximo que o padrão pode estar no texto
+        Exemplo :
+        Tamanho do Texto N = 100 
+        Tamanho do Padrão M = 10
+        Se o Padrão não for encontrado até a posição [90] não será possível encontrar ele a partir da posição 91, pois
+        não há mais tamanho sobrando no texto.
+    """
+    max_range = (N - M + 1)
 
     # Primeiro loop no pattern
-    for i in range(N - M + 1):
+    for i in range(max_range):
         j = 0
 
         # Para o atual index i, checar se o pattern está presente no texto
         while(j < M):
-            if (text[i + j] != pattern[j]):
+            if (text[i + j] != pattern[j]): #Caso encontre um erro na checagem do pattern, finalize e itere a buca
                 break
             j += 1
 
         if (j == M):
-            pass
+            pass #Encontrado com sucesso
             #print("Pattern found at index ", i)
-
-
-def get_texto():
-    """[sumario]
-    Obtém um texto através de um request para uma API geradora de texto Lorem Ipsum
-    """
-    req_url = 'https://asdfast.beobit.net/api/'
-    params = {'type': 'paragraph', 'length': '2000', 'startLorem': 'true'}
-    response = requests.get(url=req_url, params=params)
-    data = response.json()
-
-    return (data["text"].replace('\n', ''))
-
 
 def main():
 
-    word_number = 20000
-
+    word_number = 500000
+    print("Processando...")
     # GERADOR DE LOREM IPSUM ALEATÓRIO
     text = lorem.get_sentence(count=1, comma=(
-        0, 2), word_range=(word_number, word_number))
-    #text = lorem.get_paragraph(count=2000, comma=(0, 2), word_range=(4, 10), sentence_range=(5, 10), sep='\n')
+       0, 2), word_range=(word_number, word_number))
+
+    #text = "The quick brown fox jumps over the lazy dog"
 
     # GERADOR DE PADRÃO ALEATÓRIO
-    pattern = lorem.get_word(count=1)
-    #pattern = "consectetur"
-    print("-----------------------------------------\n",
-          " BUSCANDO PELA PALAVRA :", pattern, "\n",
-          " TEXTO DE", word_number, "PALAVRAS\n"
-          "-----------------------------------------",
-          )
+    #pattern = lorem.get_word(count=1)
+    pattern = "eoifoaslwllclsadlwlecjwwoepapwewpelacegtlclaspspeqlelcvlfkedlasckaqwleledlwcaseçeçcpqereqlceqwpcasrlrqwoaclrçqwojcaçlvmqwpievpçkajspojqwepozxcpborwkepçasçdlvkbwprjvaçvçbmhw"
 
     start = time.time()
     kmp_search(pattern, text)
@@ -119,10 +113,15 @@ def main():
     end2 = time.time()
     t2 = end2 - start2
 
-    print("| KMP   : ", f"{t:.8f} sec |", int((t * 1000000000)), "ns |")
-    print("| NAIVE : ", f"{t2:.8f} sec |", int((t2 * 1000000000)), "ns |")
-    print("-----------------------------------------")
-
+    print(
+        "-----------------------------------------\n"+
+        " BUSCANDO PELA PALAVRA :", pattern, "\n"+
+        " TEXTO DE", word_number, "PALAVRAS\n"+
+        "-----------------------------------------\n"+
+        "| KMP   : ", f"{t:.20f} sec |", int((t * NANO_MULTIPLIER)), "ns |\n"+
+        "| NAIVE : ", f"{t2:.20f} sec |", int((t2 * NANO_MULTIPLIER)), "ns |\n"+
+        "-----------------------------------------"
+    )
 
 if __name__ == "__main__":
     main()

@@ -11,7 +11,7 @@ funcao naive_busca(padrao: string, texto: string):
     N = texto.tamanho()
  
     // Primeiro loop no padrao
-    for i em (N - M + 1):
+    para i de 0 até (N-M+1):
         j = 0
          
         // Para o atual index i, checar se o padrao está presente no texto
@@ -21,6 +21,6 @@ funcao naive_busca(padrao: string, texto: string):
             j += 1
         
         se (j == M):
-            // aqui pode-se printar o index em que o padrão foi encontrado 
+           print ('Pattern found at index :' j)
 
 ------- Fim --------
