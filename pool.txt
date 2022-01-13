@@ -63,3 +63,5 @@ POOL DE PALAVRAS :
 'velit',
 'veniam',
 'voluptate'
+'intellectualized'
+'quinquagintaquadringentillionths'
