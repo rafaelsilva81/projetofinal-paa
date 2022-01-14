@@ -12,7 +12,13 @@ pool = ('ad', 'adipiscing', 'aliqua', 'aliquip', 'amet', 'anim', 'aute', 'cillum
 
 def get_pool():
     return pool
- 
+
+def get_custom_word(tam):
+    for var in pool:
+        if(len(var) == tam):
+            return var
+    return 'lorem'
+
 def ms(tempo, casas_decimais): 
     return round((tempo * 1000), casas_decimais)
 

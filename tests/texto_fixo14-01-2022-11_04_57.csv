@@ -1,0 +1,15 @@
+KMP
+tamanho_texto,tamanho_padrao,tempo (ms)
+200000,2,139.934
+200000,4,137.105
+200000,8,140.593
+200000,16,122.754
+200000,32,120.188
+NAIVE
+tamanho_texto,tamanho_padrao,tempo (ms)
+200000,2,124.97
+200000,4,128.584
+200000,8,136.573
+200000,16,140.592
+200000,32,135.933
+Tipo do teste : texto_fixo,Horário : 14-01-2022 11:04:57
