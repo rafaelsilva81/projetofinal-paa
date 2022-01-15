@@ -1,0 +1,15 @@
+KMP
+tamanho_texto,tamanho_padrao,tempo (ms)
+10000,2,9.92
+20000,4,19.866
+40000,8,38.345
+80000,16,81.642
+160000,32,146.85
+NAIVE
+tamanho_texto,tamanho_padrao,tempo (ms)
+10000,2,10.417
+20000,4,20.737
+40000,8,40.769
+80000,16,84.988
+160000,32,157.608
+Tipo do teste : dobrar_ambos,Horário : 15-01-2022 16:19:10
